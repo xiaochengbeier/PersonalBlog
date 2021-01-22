@@ -1,0 +1,126 @@
+body{
+    /* background-image: url("../bg.gif"); */
+    background: black;
+    padding-top: 70px;
+}
+.d-sx-none{
+    display: none;
+}
+.d-sx-block{
+    display: block;
+}
+@media (max-width: 766.98px){
+    .sm-m{
+        margin: 20px !important;
+    }
+    .pic-sm-dis{
+        width: 500px;
+        height: 300px;
+    }
+} 
+@media (min-width: 575.98px) { 
+    .d-sm-none{
+        display: none;
+    }
+    .d-sm-block{
+        display: block;
+    }
+    .sm-with{
+        width: 70%;
+    }
+}
+@media (min-width: 767.98px) { 
+    .d-md-none{
+        display: none;
+    }
+    .d-md-block{
+        display: block;
+    }
+    .md-with{
+        width: 80%;
+        margin: auto;
+    }
+    .md-w{
+        width: 70%;
+    }
+    .pic-md-dis{
+        width:350px;
+    }
+}
+@media (min-width: 991.98px) { 
+    .d-lg-none{
+        display: none;
+    }
+    .d-lg-block{
+        display: block;
+    }
+    .pic-lg-dis{
+        width: 600px;
+        height: 400px;
+    }
+}
+@media (min-width: 1199.98px) { 
+    .d-ex-none{
+        display: none;
+    }
+    .d-ex-block{
+        display: block;
+       
+    }
+}
+.text-shadow{
+    text-shadow: 1px 1px 4px rgb(202, 199, 199) ,
+    2px 2px 4px rgb(187, 182, 182) ,
+    -1px -1px 4px rgb(112, 111, 111) ,
+    -2px -2px 4px rgb(61, 60, 60) ,
+    1px 1px 4px rgb(202, 199, 199) ,
+    2px 2px 4px rgb(187, 182, 182) ,
+    -1px -1px 4px rgb(112, 111, 111) ,
+    -2px -2px 4px rgb(61, 60, 60) ;
+}
+.box-shadow{
+    box-shadow: 1px 1px 4px rgb(202, 199, 199) inset,
+    2px 2px 4px rgb(187, 182, 182) inset,
+    -1px -1px 4px rgb(112, 111, 111) inset,
+    -2px -2px 4px rgb(61, 60, 60) inset,
+    1px 1px 4px rgb(202, 199, 199) ,
+    2px 2px 4px rgb(187, 182, 182) ,
+    -1px -1px 4px rgb(112, 111, 111) ,
+    -2px -2px 4px rgb(61, 60, 60) ;
+}
+pre{
+    background: black;
+}
+  /* table 样式 */
+  table {
+    border-top: 1px solid #ccc;
+    border-left: 1px solid #ccc;
+  }
+  table td,
+  table th {
+    border-bottom: 1px solid #ccc;
+    border-right: 1px solid #ccc;
+    padding: 3px 5px;
+  }
+  table th {
+    border-bottom: 2px solid #ccc;
+    text-align: center;
+  }
+  
+  /* blockquote 样式 */
+  blockquote {
+    display: block;
+    border-left: 8px solid #d0e5f2;
+    padding: 5px 10px;
+    margin: 10px 0;
+    line-height: 1.4;
+    font-size: 100%;
+    background-color: #f1f1f1;
+  }
+  .a-list-item.ant-list-item .ant-list-item-action{
+    position: absolute;
+    bottom: 0px;
+    right: 0px;
+    left: 0px;
+    margin: auto;
+  }

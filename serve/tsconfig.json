@@ -1,0 +1,18 @@
+{
+  "compilerOptions": {
+    // 配置运行环境  
+    "lib": ["ES6"],
+    // 配置模块化
+    "module": "CommonJS",
+    // 导出标准
+    "target": "es6",
+    // 输出目录
+    "outDir": "./dist",
+    // 允许commjs导出使用es导入
+    "esModuleInterop": true,
+    // 开启注解
+    "experimentalDecorators": true
+  },
+  // 编译查找目录
+  "include": ["./src"]
+}
