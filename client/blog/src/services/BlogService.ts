@@ -63,16 +63,16 @@ export  class BlogService{
          *  根据博客id 增加点赞量
          * @param bid 根据博客id 增加点赞量
          */
-        static async addLikes(bid: number){
-            const addLikesRes = await axios.put(API.BLOG_API+"/addl/"+bid);
-            return addLikesRes;
+        static async addLikes(id: number){
+            const addLikesRes = await axios.put<ResponseDataType>(API.BLOG_API+"/addl/"+id);
+            return addLikesRes.data;
         }
         /**8
          * 根据博客 id 增加阅读量
          * @param bid 博客id
          */
-        static async addReads(bid: number){
-            const addReadRes = await axios.put(API.BLOG_API+"/addr/"+bid);
-            return addReadRes;
+        static async addReads(id: number){
+            const addReadRes = await axios.put<ResponseDataType>(API.BLOG_API+"/addr/"+id);
+            return addReadRes.data;
         }
 }

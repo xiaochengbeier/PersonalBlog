@@ -85,6 +85,7 @@ export default class MyArticle extends Vue {
      goArticleDetail(item){
       const uid = item.userId;
       const bid = item.blogId;
+      BlogService.addReads(bid);
       this.$router.push(`/blogshow?uid=${uid}&bid=${bid}`);
     }
     onLoadMore() {

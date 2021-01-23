@@ -19,7 +19,8 @@
     "vue-property-decorator": "^8.4.2",
     "vue-router": "^3.2.0",
     "vuex": "^3.4.0",
-    "wangeditor": "^4.6.2"
+    "wangeditor": "^4.6.2",
+    "xss": "^1.0.8"
   },
   "devDependencies": {
     "@typescript-eslint/eslint-plugin": "^2.33.0",

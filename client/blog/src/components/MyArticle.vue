@@ -53,6 +53,8 @@ export default class MyArticle extends Vue {
     goArticleDetail(item){
       const uid = item.userId;
       const bid = item.blogId;
+      // 阅读量加一
+      BlogService.addReads(bid);
       this.$router.push(`/blogshow?uid=${uid}&bid=${bid}`);
     }
     getRandom(){

@@ -20,6 +20,11 @@
              <div  class="w-e-text-container" v-html="blogInfo.content" id="test">
              </div>
           </div>
+          <div class="likes">
+             <a-button :loading="loading" @click="addLikes" type="primary" icon="smile">
+               {{"喜欢 "+likes}}
+            </a-button>
+          </div>
        </div>
        <div class="article-common">
           <Common :bid="blogId"/>
@@ -44,10 +49,18 @@ import {AuthorInfoType} from "../entry/AuthorInfoEntry";
 })
 export default class BlogShow extends Vue {
    blogId!: number;
+   likes = 0;
    blogInfo = {};
+   loading= false;
    authorInfo: AuthorInfoType = {
       name: "", poster: "", isPick: false, picks: 20
    };
+   async addLikes(){
+    this.loading = true;
+    const addRes = await  BlogService.addLikes(this.blogId);
+    this.likes++;
+    this.loading = false;
+   }
    changPickCallBack(isPick,picks){
       this.authorInfo.isPick = isPick;
       this.authorInfo.picks = this.authorInfo.picks+picks;
@@ -67,6 +80,7 @@ export default class BlogShow extends Vue {
       const findBlogById = await BlogService.getByBlogId(+bid);
       if(findBlogById.code === 200){
          this.blogInfo = findBlogById.data;
+         this.likes =  findBlogById.data.likes;
       }
       //查询有多少人关注了它
       const pickHis: any = await PickerService.howManyPickMe(+uid);
@@ -87,6 +101,9 @@ export default class BlogShow extends Vue {
 }
 </script>
 <style  scoped>
+   .likes{
+      padding-bottom: 30px;
+   }
    .menu-wrap{
       max-width: 270px;
       margin:40px  auto;

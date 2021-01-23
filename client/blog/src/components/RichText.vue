@@ -54,7 +54,7 @@ import Editor from "wangeditor";
 import {UploadFileService} from "../services/UploadFileService";
 import {BlogService} from "../services/BlogService";
 import {BlogEntry} from "../entry/BlogEntry"
-import StrikeThrough from "wangeditor/dist/menus/strike-through";
+import xss from "xss";
 @Component
 export default class RichText extends Vue {
     private editor!:  Editor;
@@ -155,7 +155,8 @@ export default class RichText extends Vue {
             this.$message.error("亲! ! 咱们这边文章内容也不能为空哦 ");
             return;
         }
-        this.aritcleContent = html as string;
+        
+        this.aritcleContent = xss(html as string);
         this.visible = true;
     }
 }

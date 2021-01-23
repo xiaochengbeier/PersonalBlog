@@ -25,6 +25,7 @@
     import { Component, Vue } from 'vue-property-decorator';
     import {BlogService} from "../services/BlogService";
     import { SearchConditionEntity } from "../entry/SearchConditionEntry";
+import { getTextFromNodeText } from '../utils';
     @Component
     export default class PicDispaly extends Vue {
         blogsHot = [];
@@ -42,7 +43,7 @@
                  const showHotBlogData =   data.datas.map(item=>{
                       return{
                           blogId: item.blogId,
-                          content: item.content,
+                          content:  getTextFromNodeText(item.content),
                           likes: item.likes,
                           reads: item.reads,
                           userId: item.userId,
@@ -56,6 +57,8 @@
         }
         // 点击链接到详情页
         goBlogInfo(userId,blogId){
+            // 阅读量加一
+            BlogService.addReads(blogId);
             this.$router.push("/blogshow?uid="+userId+"&bid="+blogId);
         }
     }

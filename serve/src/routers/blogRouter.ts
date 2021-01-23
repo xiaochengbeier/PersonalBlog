@@ -64,8 +64,8 @@ blogRouter.get("/",async(req,res)=>{
 });
 // 增加阅读
 blogRouter.put("/addr/:id",async (req,res)=>{
-    const {bid} = req.params;
-    const addResult =  await  BlogService.addReads(+bid);
+    const {id} = req.params;
+    const addResult =  await  BlogService.addReads(+id);
     if( addResult){
         ResponseHandler.responseData(res,{code:200,msg:"success",des:"增加阅读量成功"});
         return;
@@ -74,8 +74,8 @@ blogRouter.put("/addr/:id",async (req,res)=>{
 })
 // 增加点赞
 blogRouter.put("/addl/:id",async (req,res)=>{
-    const {bid} = req.params;
-    const addResult =  await  BlogService.addReads(+bid);
+    const {id} = req.params;
+    const addResult =  await  BlogService.addLikes(+id);
     if( addResult){
         ResponseHandler.responseData(res,{code:200,msg:"success",des:"点赞成功"});
         return;
