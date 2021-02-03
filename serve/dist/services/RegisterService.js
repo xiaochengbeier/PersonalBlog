@@ -47,7 +47,7 @@ class RegisterService {
             // 生成 jwt 字符串
             const jwtStr = verify_1.signJwt({ email, pass }, secrete, 60 * 60);
             // 给用户发送邮件等待验证
-            email_1.sendMailTo(email, host + "/regist/verify?jwt=" + jwtStr + "&id=" + registObj.registerId, email);
+            email_1.sendMailTo(email, host + "/api/regist/verify?jwt=" + jwtStr + "&id=" + registObj.registerId, email);
             return true;
         });
     }
@@ -59,6 +59,9 @@ class RegisterService {
         return __awaiter(this, void 0, void 0, function* () {
             // 根据id从数据库判断是否已经激活
             const findByPkResult = yield db_1.Register.findByPk(id);
+            if (!findByPkResult) {
+                return false;
+            }
             const findObj = findByPkResult.toJSON();
             // 如果已经校验过了直接返回true
             if (findObj.status) {
@@ -77,7 +80,7 @@ class RegisterService {
                 }
             });
             //   将用户的账号密码存入用户表
-            yield db_1.User.create({ name: "用户名", email: verifyResult.email, pass: verifyResult.pass, birth: new Date("1999-10-12"), ctime: new Date() });
+            yield db_1.User.create({ name: "大佬大佬", email: verifyResult.email, pass: verifyResult.pass, birth: new Date("1999-10-12"), ctime: new Date() });
             return true;
         });
     }

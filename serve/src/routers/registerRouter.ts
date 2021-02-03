@@ -1,6 +1,7 @@
 import express, {  Request, Response } from "express";
 import { ResponseHandler } from "./ResponseHandler";
 import { RegisterService } from "../services/RegisterService";
+import {Config} from "../etc/etc"
 const registerRouter =  express.Router();
 /**
  * 用户注册接口
@@ -8,8 +9,7 @@ const registerRouter =  express.Router();
 registerRouter.post("/",async (req:Request,res:Response)=>{
     // 获得邮箱密码
     const {email,pass} =  req.body as any;
-    console.log(req.hostname,"-hostname---",req.protocol);
-    const url = req.protocol+"://"+req.hostname+":8888";
+    const url = req.protocol+"://"+req.hostname+":"+Config.port;
     const registerFind = await  RegisterService.registerCount(email,pass,url);
     if(registerFind){
         ResponseHandler.responseData(res,{code:200,msg:"success",des:"已经注册前往验证"});
@@ -24,9 +24,9 @@ registerRouter.get("/verify",async (req,res)=>{
     const {jwt,id} = req.query;
     const result =   await RegisterService.registerVerify(jwt as any, +id as any);
     if(result){
-        ResponseHandler.responseData(res,{code:200,msg:"success",des:"校验成功可以进行登录操作"});
+        res.redirect("/reglog");
         return;
     }
-    ResponseHandler.responseData(res,{code:500,msg:"fail",des:"校验失败"});
+    res.redirect("/regfail");
   })
 export {registerRouter};

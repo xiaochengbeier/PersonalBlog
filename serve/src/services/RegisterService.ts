@@ -31,7 +31,7 @@ export  class RegisterService{
         // 生成 jwt 字符串
         const jwtStr = signJwt({email,pass},secrete,60*60);
         // 给用户发送邮件等待验证
-        sendMailTo(email,host+"/regist/verify?jwt="+jwtStr+"&id="+ registObj.registerId,email);
+        sendMailTo(email,host+"/api/regist/verify?jwt="+jwtStr+"&id="+ registObj.registerId,email);
         return true;
     }
    /**
@@ -41,6 +41,9 @@ export  class RegisterService{
     static  async   registerVerify(jwt:string,id:number):Promise<boolean>{
         // 根据id从数据库判断是否已经激活
         const findByPkResult =  await Register.findByPk(id);
+        if(!findByPkResult){
+            return false;
+        }
         const findObj:any = findByPkResult.toJSON();
         // 如果已经校验过了直接返回true
         if(findObj.status){
@@ -59,7 +62,7 @@ export  class RegisterService{
             }
         });
         //   将用户的账号密码存入用户表
-        await User.create({name:"用户名",email:verifyResult.email,pass:verifyResult.pass,birth:new Date("1999-10-12"), ctime:new Date()});
+        await User.create({name:"大佬大佬",email:verifyResult.email,pass:verifyResult.pass,birth:new Date("1999-10-12"), ctime:new Date()});
         return true;
     }
 }

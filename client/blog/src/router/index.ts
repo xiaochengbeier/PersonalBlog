@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import VueRouter, { RouteConfig } from 'vue-router'
 import Home from '../views/Home.vue'
+import store from "../store/index"
 Vue.use(VueRouter)
 
 const routes: Array<RouteConfig> = [
@@ -54,11 +55,23 @@ const routes: Array<RouteConfig> = [
   },
   {
     path: '/write',
+    beforeEnter(to,from,next){
+     const state: any =   store.state;
+     if(state.login.user){
+       next();
+     }else{
+      next("/reglog");
+     }
+    },
     component: ()=> import("../views/Write.vue")
   },
   {
     path: '/search',
     component: ()=> import("../views/SearchPage.vue")
+  },
+  {
+    path:'/regfail',
+    component: ()=>import("../views/RegistFail.vue")
   }
 
 ]

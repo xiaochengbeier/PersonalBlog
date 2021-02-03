@@ -11,7 +11,7 @@ import {
 } from "./models/init-models"
 import {sequelize} from "./sequelize/index"
 initModels(sequelize);
-// sequelize.sync({alter:true});
+sequelize.sync({force:true});
 export{
     Atmaping ,
     Blog ,

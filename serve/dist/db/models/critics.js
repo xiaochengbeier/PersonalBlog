@@ -38,7 +38,7 @@ class Critics extends sequelize_1.Model {
             ctime: {
                 type: sequelize_1.DataTypes.DATE,
                 allowNull: false,
-                defaultValue: "0000-00-00 00:00:00",
+                defaultValue: new Date(),
                 comment: "创建时间"
             },
             parent: {

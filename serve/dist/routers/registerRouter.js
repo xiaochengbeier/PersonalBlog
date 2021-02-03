@@ -16,6 +16,7 @@ exports.registerRouter = void 0;
 const express_1 = __importDefault(require("express"));
 const ResponseHandler_1 = require("./ResponseHandler");
 const RegisterService_1 = require("../services/RegisterService");
+const etc_1 = require("../etc/etc");
 const registerRouter = express_1.default.Router();
 exports.registerRouter = registerRouter;
 /**
@@ -24,8 +25,7 @@ exports.registerRouter = registerRouter;
 registerRouter.post("/", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     // 获得邮箱密码
     const { email, pass } = req.body;
-    console.log(req.hostname, "-hostname---", req.protocol);
-    const url = req.protocol + "://" + req.hostname + ":8888";
+    const url = req.protocol + "://" + req.hostname + ":" + etc_1.Config.port;
     const registerFind = yield RegisterService_1.RegisterService.registerCount(email, pass, url);
     if (registerFind) {
         ResponseHandler_1.ResponseHandler.responseData(res, { code: 200, msg: "success", des: "已经注册前往验证" });
@@ -40,8 +40,8 @@ registerRouter.get("/verify", (req, res) => __awaiter(void 0, void 0, void 0, fu
     const { jwt, id } = req.query;
     const result = yield RegisterService_1.RegisterService.registerVerify(jwt, +id);
     if (result) {
-        ResponseHandler_1.ResponseHandler.responseData(res, { code: 200, msg: "success", des: "校验成功可以进行登录操作" });
+        res.redirect("/reglog");
         return;
     }
-    ResponseHandler_1.ResponseHandler.responseData(res, { code: 500, msg: "fail", des: "校验失败" });
+    res.redirect("/regfail");
 }));

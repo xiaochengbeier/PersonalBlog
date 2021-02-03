@@ -1,3 +1,5 @@
 /serve/node_modules
 /client/node_modules
 /client/blog/node_modules
+/serve/public/project
+/serve/public/upload

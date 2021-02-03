@@ -131,7 +131,7 @@
                </svg>
             </div>
             <div class="info"  @click="onClose">
-             <router-link tag="div" to="/write">
+             <router-link tag="div"   to="/write">
               <span>发表文章</span>
              </router-link> 
             </div>

@@ -28,7 +28,7 @@
         </div>
         <a-list-item class="a-list-item " slot="renderItem" slot-scope="item">
          
-        <iframe scrolling="auto"   class="project-iframe box-shadow" :src="item.ifram">
+        <iframe scrolling="auto"   class="project-iframe box-shadow" :src="item.content">
           <p>您的浏览器不支持  iframe 标签。</p>
         </iframe>
          <a  :href="item.content" target="_blank">详情</a>

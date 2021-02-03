@@ -1,7 +1,7 @@
 <template>
   <div class="clearfix">
     <a-upload
-      action="/upproject"
+      action="/api/upproject"
       accept=".zip"
       name="project"
       :default-file-list="defaultFileList"

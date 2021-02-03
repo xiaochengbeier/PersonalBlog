@@ -23,7 +23,30 @@
            {{item.content}}
           </p> 
           <div v-if="item.children">
-            <CoomonItem :replayCallBack="replayCallBack" :comments="item.children"/>
+            <!-- <CoomonItem :replayCallBack="replayCallBack" :comments="item.children"/> -->
+            <a-comment v-for="(item) in  item.children" :key="item.author + getRandom()">
+                    <span slot="actions" key="comment-nested-reply-to">
+                      <div class="replay" @click="replay(item)">
+                        回复
+                      </div>
+                    </span>
+                    <a class="author-wrap" slot="author">{{item.author}}</a>
+                    <div class="replay-wrap"  v-if="item.parent != -1"  slot="author">
+                        <span>回复</span>
+                        <a class="author-wrap" slot="author">{{item.parentName}}</a>
+                    </div>
+                    <a-tooltip slot="datetime" >
+                      <span>{{formatDate(item.datetime)}}</span>
+                    </a-tooltip>
+                    <a-avatar
+                      slot="avatar"
+                      :src="item.avatar"
+                      alt="小城贝尔"
+                    />
+                    <p slot="content">
+                    {{item.content}}
+                    </p> 
+            </a-comment>
           </div>
   </a-comment>
      <a-modal
@@ -49,7 +72,12 @@
     parent?: number;
     parentName?: string;
   } 
-  @Component
+  @Component({
+    components:{
+       /* eslint-disable */
+      CoomonItem
+    }
+  })
   export default class CoomonItem extends Vue {
     private visible = false;
     private confirmLoading = false;
@@ -69,8 +97,8 @@
     async handleOk(){
        this.confirmLoading = true;
         await  this.replayCallBack(this.replayObj,this.replayContent);
-         this.visible = false;
-        this.confirmLoading = true;
+        this.visible = false;
+        this.confirmLoading = false;
         this.replayContent = "";
     }
     handleCancel(){

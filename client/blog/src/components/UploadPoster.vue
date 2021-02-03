@@ -1,7 +1,7 @@
 <template>
   <div class="clearfix">
     <a-upload
-      action="/upload"
+      action="/api/upload"
       name="poster"
       list-type="picture-card"
       :file-list="fileList"

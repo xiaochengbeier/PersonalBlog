@@ -57,7 +57,7 @@ export class Picker extends Model<PickerAttributes, pickerCreationAttributes> im
     ctime: {
       type: DataTypes.DATE,
       allowNull: false,
-      defaultValue: "0000-00-00 00:00:00",
+      defaultValue: new Date(),
       comment: "关注时间"
     }
   }, {

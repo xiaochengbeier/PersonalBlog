@@ -4,7 +4,7 @@
             <div class="title-name">标题:</div>
             <span :class="{titleNotEmpty:isShowEmptyError&&titleContent=='', notEmptyInit: true}">标题和文章内容不能为空</span>
             <div class="title-content">
-                <a-input v-model="titleContent" placeholder="文章标题" />
+                <a-input class="title-input" v-model="titleContent" placeholder="文章标题" />
             </div>
         </div>
         <div ref="richWrap">
@@ -54,7 +54,6 @@ import Editor from "wangeditor";
 import {UploadFileService} from "../services/UploadFileService";
 import {BlogService} from "../services/BlogService";
 import {BlogEntry} from "../entry/BlogEntry"
-import xss from "xss";
 @Component
 export default class RichText extends Vue {
     private editor!:  Editor;
@@ -83,7 +82,7 @@ export default class RichText extends Vue {
     mounted(){
         const editor = new E(this.$refs.richWrap)
         // 配置上传文件接口
-        editor.config.uploadImgServer = '/upload';
+        editor.config.uploadImgServer = '/api/upload';
         // 限制上传图片类型
         editor.config.uploadImgAccept = ['jpg', 'jpeg', 'png', 'gif'];
         // 限制上传文件大小
@@ -138,7 +137,11 @@ export default class RichText extends Vue {
         this.confirmLoading = true;
         const addBlogResult: any  =  await  BlogService.addBlog(blog);
        if(addBlogResult.code === 200){
-            this.$message.success("发表博客文章成功");
+            this.$message.success("发表博客文章成功",()=>{
+                const id = this.$store.state.login.user.userId;
+                this.$router.replace("/aboutme/myarticle/"+id);
+            });
+            
         }else{
             this.$message.error(addBlogResult.des);
         }
@@ -156,7 +159,7 @@ export default class RichText extends Vue {
             return;
         }
         
-        this.aritcleContent = xss(html as string);
+        this.aritcleContent = html as string;
         this.visible = true;
     }
 }
@@ -243,8 +246,8 @@ export default class RichText extends Vue {
         border-radius: 5px;
     }
     .w-e-text-container{
-        background-color: rgba(0, 0, 0, 0.5);
-        color: rgb(255, 255, 255);
+        background-color: rgba(0, 0, 0, 0.5) !important;
+        color: rgb(255, 255, 255) !important;
         text-align: left;
     }
     .w-e-panel-tab-content textarea{
@@ -289,15 +292,22 @@ export default class RichText extends Vue {
        position: static;
    }
    /* [data-title="代码"] */
-   .w-e-toolbar .w-e-menu:nth-last-of-type(6){
-       position: static;
+   .w-e-toolbar .w-e-menu{
+       position: static !important;
    } 
   .w-e-toolbar .w-e-menu .w-e-panel-container{
       width: 80% !important;
       margin-left: 0px !important;
       left: 10px;
   }
+  .w-e-menu .w-e-droplist{
+      width: 80% !important;
+  }
    #test{
        text-align: left! important;
+   }
+   .title-input{
+       font-size: 18px;
+       font-weight: bolder;
    }
 </style>

@@ -65,8 +65,13 @@ export default class RegisterForm extends Vue {
          console.log(loginResult,"-loginResult--");
          if(loginResult.code === 200){
            this.$message.success("登录成功",1, ()=>{
-            //  登录成功返回非首页
-             this.$router.back();
+            // 如果说开始就登录页那么 登录成功返回非首页
+             if(this.$route.path.includes("/reglog")){
+               this.$router.replace("/");
+             }else{
+               this.$router.back();
+             }
+             
            })
          }else{
               this.$message.error(loginResult.des);

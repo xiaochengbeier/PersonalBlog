@@ -85,13 +85,13 @@ export class User extends Model<UserAttributes, userCreationAttributes> implemen
     birth: {
       type: DataTypes.DATE,
       allowNull: false,
-      defaultValue: "0000-00-00 00:00:00",
+      defaultValue: new Date("2000-12-12"),
       comment: "用户生日"
     },
     ctime: {
       type: DataTypes.DATE,
       allowNull: false,
-      defaultValue: "0000-00-00 00:00:00",
+      defaultValue: new Date(),
       comment: "用户注册时间"
     },
     poster:{

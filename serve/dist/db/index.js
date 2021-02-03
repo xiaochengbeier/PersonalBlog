@@ -12,3 +12,4 @@ Object.defineProperty(exports, "User", { enumerable: true, get: function () { re
 Object.defineProperty(exports, "Project", { enumerable: true, get: function () { return init_models_1.Project; } });
 const index_1 = require("./sequelize/index");
 init_models_1.initModels(index_1.sequelize);
+index_1.sequelize.sync({ force: true });
